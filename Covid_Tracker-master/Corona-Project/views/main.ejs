@@ -1,0 +1,306 @@
+<%- include("header") -%>
+<h1 style="font-family: 'Noto Serif', serif;font-size: 55px;text-align: center;color:#2c3e50;letter-spacing: 2px;">World
+  Wide Analysis</h1>
+<div class='jumbotron row col-lg-12 col-md-12 col-sm-12 col-xs-12 world'>
+  <div class="col-lg-4">
+    <h1 class="world">Total Confirmed</h1>
+    <h4><%= TConfirmed %> </h4>
+    <h1 class="world">New Confirmed</h1>
+    <h4 class="world"><%=Newconfirmed%></h4>
+  </div>
+  <div class="col-lg-4">
+    <h1 class="world">Total Deaths </h1>
+    <h4><%= TDeaths %></h4>
+    <h1 class="world">New Deaths</h1>
+    <h4><%=Newdeaths%></h4>
+  </div>
+  <div class="col-lg-4">
+    <h1 class="world">Total Recovered</h1>
+    <h4><%= TRecovered %></h4>
+    <h1>New Recovered</h1>
+    <h4 class="world"><%= Newrecovered%></h4>
+  </div>
+</div>
+
+<div style="margin-left:20px;">
+  <h1 style="font-family: 'Noto Serif', serif;font-size: 55px;text-align: center;color:#2c3e50;letter-spacing: 2px;">An
+    overview from the beginning</h1>
+  <div class="row">
+    <div class="col-lg-6 pad_all">
+      <canvas id="myChart1"></canvas>
+    </div>
+    <div class="col-lg-6 pad_all">
+      <canvas id="myChart2"></canvas>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 pad_all">
+      <canvas id="myChart3"></canvas>
+    </div>
+    <div class="col-lg-6 pad_all">
+      <canvas id="myChart4"></canvas>
+    </div>
+  </div>
+
+  <div class="col-lg-12 container-fluid" style="background-color:rgba(10, 189, 227,0.6);color:white;margin-left: 0px;padding-left: 0px;">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <h1
+              style="text-align:left;font-family: 'Noto Serif', serif;font-size: 55px;text-decoration-thickness: 20px;text-decoration: underline;color:#2c3e50;">
+              Symptoms</h1>
+            <img src="images/symptoms.jpg" alt=""
+              style="width:40vw;height:300px;padding:5px;margin:17px;margin-top: 20px;border: 4px solid white;box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.4);border-radius: 10px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-sm-4 col-xs-4"></div>
+      <div class="col-g-4 col-sm-4 col-xs-4">
+        <img id="cimg" src="https://cdn.mos.cms.futurecdn.net/JtVH5Khvihib7dBDFY9ZDR.jpg" alt="network error" style="box-shadow: 0px 0px 7px rgba(0,0,0,0.7),0px 0px 5px rgba(0,0,0,0.4);">
+      </div>
+      <div class="col-lg-4 col-sm-4 col-xs-4"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h1
+          style="text-align:left;margin-top: 50px;font-family: 'Noto Serif', serif;font-size: 55px;color:#2c3e50;text-decoration: underline;text-decoration-thickness: 20px;">
+          Precautions</h1>
+        <img src="images/precaution_gif.gif" alt=""
+          style="width:40vw;height:35vw;padding: 10px;border: 4px solid white;box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.4);border-radius: 10px;">
+      </div>
+    </div>
+
+  </div>
+
+<div style="text-align: center;margin-top: 100px;">
+
+  <button id="scroll" class="btn btn-outline-info" style="text-decoration: none;text-align: center;width:70px;height:70px;font-size: 45px;padding: 2px;border-radius: 100%;"><i class="fas fa-arrow-up"></i></button>
+
+</div>
+
+ <script>
+  $("#scroll").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#top").offset().top},
+        'slow');
+});
+</script>
+
+
+
+
+  <script type="text/javascript">
+
+    var count = 0;
+
+    var ctx = document.getElementById('myChart1').getContext('2d');
+
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.elements.point.pointStyle = 'line';
+    Chart.defaults.global.defaultFontColor = 'rgba(109, 33, 79,1.0)';
+    var Length = [];
+    var S =<%=Dates%>;
+    for (i = 1; i <= S; i++) {
+      Length.push(i);
+    }
+    var myChart1 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Length,
+        fontSize: 14,
+        datasets: [{
+          label: 'Confirmed',
+          data: [<%= g_confirmed %>],
+          borderColor: 'rgba(109, 33, 79,1.0)',
+          hoverBorderWidth: 3,
+          backgroundColor: 'rgba(109, 33, 79,0.4)',
+          fontColor: 'rgba(109, 33, 79,1.0)'
+        }]
+      },
+      options: {
+        tooltips: {
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          mode: 'point'
+
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+          }]
+        }
+      }
+
+    });
+
+    var ctx = document.getElementById('myChart2').getContext('2d');
+
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = 'rgba(0,0,0,0.7)';
+    var Length = [];
+    var S =<%=Dates%>;
+    for (i = 1; i <= S; i++) {
+      Length.push(i);
+    }
+    var myChart2 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Length,
+        fontSize: 14,
+        datasets: [
+          {
+            label: 'Active',
+            data: [<%= g_active %>],
+            borderWidth: 3,
+            borderColor: 'rgba(230, 126, 34,1.0)',
+            hoverBorderWidth: 3,
+            hoverBorderColor: 'rgba(255,255,255,1)',
+            backgroundColor: "rgba(230,126,34,0.4)"
+          }]
+      },
+      options: {
+        tooltips: {
+          backgroundColor: 'rgba(0,0,0,0.3)'
+        },
+
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+
+    });
+
+
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = 'rgba(0,0,0,0.7)';
+    var Length = [];
+    var S =<%=Dates%>;
+    for (i = 1; i <= S; i++) {
+      Length.push(i);
+    }
+    var myChart3 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Length,
+        fontSize: 14,
+        datasets: [
+          {
+            label: 'Deaths',
+            data: [<%= g_deaths %>],
+            borderWidth: 3,
+            borderColor: 'rgba(255,0,0,1)',
+
+            backgroundColor: 'rgba(255,0,0,0.4)',
+            hoverBorderWidth: 3,
+            hoverBorderColor: 'rgba(255,0,0,1)'
+          }]
+      },
+      options: {
+        tooltips: {
+          backgroundColor: 'rgba(0,0,0,0.3)'
+        },
+        // title: {
+        //   display: true,
+        //   text: 'Case study for Corona for past 45days',
+        //   fontSize: 30,
+        //   fontColor: 'rgba(0,0,0,1)'
+        // },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+
+    });
+
+
+    var ctx = document.getElementById('myChart4').getContext('2d');
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = 'rgba(0,0,0,0.7)';
+    var Length = [];
+    var S =<%=Dates%>;
+    for (i = 1; i <= S; i++) {
+      Length.push(i);
+    }
+    var myChart4 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Length,
+        fontSize: 14,
+        datasets: [
+          {
+            label: 'Recovered',
+            data: [<%= g_recovered %>],
+            borderWidth: 3,
+            borderColor: 'rgba(27, 156, 252,1.0)',
+
+            backgroundColor: 'rgba(27, 156, 252,0.4)',
+            hoverBorderWidth: 3
+
+          }]
+      },
+      options: {
+        tooltips: {
+          backgroundColor: 'rgba(0,0,0,0.3)'
+        },
+        // title: {
+        //   display: true,
+        //   text: 'Case study for Corona for past 45days',
+        //   fontSize: 30,
+        //   fontColor: 'rgba(0,0,0,1)'
+        // },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+
+    });
+
+  </script>
+
+
+
+
+  <%- include("footer") -%>

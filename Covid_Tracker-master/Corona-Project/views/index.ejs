@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>CaseStudy</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+    integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&family=Roboto:wght@300&family=Source+Sans+Pro&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
+
+  </script>
+
+</head>
+
+<body>
+
+  <div class="row">
+
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4 flag_col">
+      <img src="<%= img %> " id="flag" alt="network error">
+    </div>
+    <div class="col-lg-4">
+    </div>
+
+  </div>
+  <div class="jumbotron">
+    <div class="head_div" style="text-align:center;margin-top:30px;">
+      <h3>Continent: <%= c_continent %></h3><br>
+      <h3>Country: <%=country %></h3><br>
+    </div>
+    <div class="row  main_data">
+
+      <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"></div>
+
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 data_div">
+
+        <h4>Country Population:<%=c_population %></h4><br>
+        <h4>Total tests: <%=total_tests %> </h4><br>
+        <h4>Active per million:<%= a_million %></h4><br>
+        <h4>Total recovered:<%= total_recovered %></h4><br>
+      </div>
+
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 data_div">
+
+        <h4>Today cases:<%= today_cases %></h4><br>
+        <h4>Today recovered:<%= today_recovered %></h4><br>
+        <h4>Today deaths:<%=today_deaths %></h4><br>
+        <h4>Total deaths:<%=total_deaths %></h4><br>
+      </div>
+      <div class="col-lg-1 col-md-12 col-sm-12 col-xs-12"></div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 graph">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 graph">
+      <canvas id="myChart2"></canvas>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 graph">
+      <canvas id="myChart3"></canvas>
+    </div>
+    <div class="col-lg-3">
+
+    </div>
+  </div>
+
+  <hr class="style-two">
+  <% if(provinces!=null){ %>
+  <div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+
+    </div>
+    <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12 table">
+      <h1
+        style="font-family: 'Noto Serif', serif;font-size: 55px;text-align: center;color:#2c3e50;letter-spacing: 2px;">
+        State-Wise Analysis</h1>
+      <table>
+        <tr>
+          <th>State</th>
+          <th>Deaths</th>
+          <th>Confirmed</th>
+          <th>Recovered</th>
+          <th>Active</th>
+        </tr>
+        <% provinces.forEach(function(item){ %>
+        <tr>
+          <td><%=item.Province_State %></td>
+          <td><%= item.Deaths %></td>
+          <td><%= item.Confirmed %></td>
+          <td><%= item.Recovered %></td>
+          <td><%= item.Active %></td>
+        </tr>
+        <%  }) %>
+      </table>
+    </div>
+    <% } %>
+
+
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <form action="/" method="GET">
+      <button type="submit" class="btn btn-outline-dark session">Back to Home</button>
+    </form>
+   
+  </div>
+
+</body>
+<script type="text/javascript">
+
+  var count = 0;
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  ctx.height = 900;
+  Chart.defaults.global.defaultFontSize = 18;
+  Chart.defaults.global.elements.point.pointStyle = 'line';
+  Chart.defaults.global.defaultFontColor = 'rgba(0,0,0,0.7)';
+  var Length = [];
+  var S =<%=Dates%>;
+  for (i = 1; i <= S; i++) {
+    Length.push(i);
+  }
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Length,
+      fontSize: 14,
+      datasets: [{
+        label: 'Confirmed',
+        data: [<%= Confirmed %>],
+        borderColor: 'rgba(55, 66, 250,1)',
+        hoverBorderWidth: 3,
+        // hoverBorderColor: 'rgba(100,240,200,1)',
+        backgroundColor: 'rgba(55, 66, 250,0.4)'
+      }]
+    },
+    options: {
+
+      responsive: true,
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        mode: 'point'
+
+      },
+
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          },
+        }]
+      }
+    }
+
+  });
+
+  var ctx = document.getElementById('myChart2').getContext('2d');
+  ctx.height = 900;
+  Chart.defaults.global.defaultFontSize = 18;
+  Chart.defaults.global.defaultFontColor = 'rgba(0,0,0,0.7)';
+  var Length = [];
+  var S =<%=Dates%>;
+  for (i = 1; i <= S; i++) {
+    Length.push(i);
+  }
+  var myChart2 = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Length,
+      fontSize: 14,
+      datasets: [
+        {
+          label: 'Active',
+          data: [<%= Active %>],
+          borderWidth: 3,
+          borderColor: 'rgba(6, 82, 221,1.0)',
+          hoverBorderWidth: 3,
+          hoverBorderColor: 'rgba(6, 82, 221,1.0))',
+          backgroundColor: "rgba(6, 82, 221,0.4)"
+        }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: 'rgba(0,0,0,0.3)'
+      },
+
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+
+  });
+
+
+  var ctx = document.getElementById('myChart3').getContext('2d');
+  ctx.height = 900;
+  Chart.defaults.global.defaultFontSize = 18;
+  Chart.defaults.global.defaultFontColor = 'rgba(0,0,0,0.7)';
+  var Length = [];
+  var S =<%=Dates%>;
+  for (i = 1; i <= S; i++) {
+    Length.push(i);
+  }
+  var myChart3 = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Length,
+      fontSize: 14,
+      datasets: [
+        {
+          label: 'Deaths',
+          data: [<%= Deaths %>],
+          borderWidth: 3,
+          borderColor: 'rgba(255,0,0,1)',
+
+          backgroundColor: 'rgba(255,0,0,0.4)',
+          hoverBorderWidth: 3,
+          hoverBorderColor: 'rgba(255,0,0,1)'
+        }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: 'rgba(0,0,0,0.3)'
+      },
+
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+
+  });
+
+</script>
+<%- include("footer") -%>
+
+</html>

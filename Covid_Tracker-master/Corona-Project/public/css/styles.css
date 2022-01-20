@@ -1,0 +1,338 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  /* background-image: linear-gradient(to right,#bdc3c7,#2c3e50); */
+  font-weight: 50px;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.typewriter h1 {
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: .10em solid black;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em;
+  /* Adjust as needed */
+
+  animation:
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end forwards;
+}
+
+.pad_all {
+  padding: 30px;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 70%
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: #2c3e50;
+  }
+}
+
+footer {
+  text-align: center;
+}
+
+.commonlink {
+  color: white;
+}
+
+.nav-link {
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+.world {
+  font-family: 'Noto Serif', serif;
+  margin-top: 20px;
+  background-image: url('https://i0.wp.com/hd-background.com/wp-content/uploads/2019/11/19453-desktop-wallpapers-world-map.jpg?fit=1920%2C1200&ssl=1');
+  color: white;
+}
+
+#cimg {
+  width: 350px;
+  height: 330px;
+  border: 2px solid white;
+  border-radius: 100%;
+  /* margin-left: 80px; */
+  position: relative;
+  margin-top: 15px;
+  transition-property: transform;
+  transition: 1s;
+  transition-timing-function: linear;
+
+
+}
+
+#cimg:hover {
+  position: relative;
+  transform: rotateY(180deg);
+  transform: rotateX(180deg);
+
+
+
+
+}
+
+#started {
+  border: 1px solid gray;
+  border-radius: 20px;
+  /* height:270px; */
+  margin-top: 20px;
+  background-color: #f4f6ff;
+  padding: 5px;
+  color: brown;
+  line-height: 40px;
+
+  /* margin-left: 5px; */
+}
+
+#symptoms {
+  border: 1px solid gray;
+  border-radius: 20px;
+  /* height:270px; */
+  margin-top: 20px;
+  line-height: 40px;
+  padding: 5px;
+  background-color: #f4f6ff;
+}
+
+.bs,
+.zoom {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: transform .2s;
+}
+
+#precautions {
+  margin-top: 30px;
+  margin-left: 500px;
+  border: 1px solid gray;
+  width: 600px;
+  /* height:270px; */
+  padding: 20px;
+  text-align: center;
+  background-color: #f4f6ff;
+  border-radius: 20px;
+  color: #f37121;
+  margin-right: 20px;
+  line-height: 30px;
+}
+
+/* .world{
+  margin-top:20px;background-image:url('https://wallpapercave.com/wp/wp2593864.jpg');color:white;
+} */
+
+.current {
+  background-image: url('https://w0.pngwave.com/png/351/865/globe-world-map-blue-earth-png-clip-art.png');
+  color: black;
+
+}
+
+.zoom:hover {
+
+  transform: scale(1.08);
+}
+
+@media (min-width:0px) and (max-width:600px) {
+  #precautions {
+    margin-left: 0px;
+
+  }
+
+  /* #started h3{
+    font-size: 20px;
+  }
+  #started p{
+    font-size: 14px;
+  } */
+  .world {
+    margin: 10px 10px;
+  }
+
+  #precautions,
+  #symptoms {
+    margin: 10px 10px;
+    padding: 10px;
+    /* width:510px; */
+    /* height: 280px; */
+  }
+
+
+}
+
+@media (min-width:0) and (max-width:300) {
+
+  #cimg {
+    margin-left: 0px;
+  }
+}
+
+/* For Countries Page */
+#flag {
+  box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 15vw;
+}
+
+.flag_col {
+  text-align: center;
+  margin-top: 80px;
+  position: relative;
+  animation-name: flag;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  /* animation-delay: 1s; */
+}
+
+@keyframes flag {
+  0% {
+    top: -400px
+  }
+
+  100% {
+    top: 0px
+  }
+}
+
+.head_div h3 {
+  font-weight: 30px;
+  font-size: 35px;
+  color: black;
+  font-family: 'Noto Serif', serif;
+  text-decoration: underline black;
+  text-decoration-thickness: 30px;
+}
+
+.data_div {
+  text-align: left;
+}
+
+.data_div h4 {
+  font-weight: 30px;
+  font-size: 25px;
+  color: black;
+  text-decoration: underline dotted black;
+  font-family: 'Roboto', sans-serif;
+}
+
+.graph {
+  height: 350px;
+  position: relative;
+  animation-name: line_graph;
+  animation-fill-mode: forwards;
+  animation-duration: 4s;
+}
+
+.main_data {
+  margin-top: 30px;
+  text-align: center;
+}
+
+@keyframes line_graph {
+  0% {
+    left: -1000px
+  }
+
+  100% {
+    left: 0px
+  }
+}
+
+@media (min-width:0px) and (max-width:991px) {
+  .data_div {
+    text-align: center;
+  }
+}
+
+footer {
+  margin-top: 200px;
+}
+
+/* Table Styling */
+
+table th {
+  padding: 15px;
+  font-size: 30px;
+  color: black;
+  letter-spacing: 3px;
+  font-family: 'Noto Serif', serif;
+  background-color: gray;
+}
+
+hr.style-two {
+  border: 0;
+  height: 3px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+table {
+  margin-top: 50px;
+  border-collapse: collapse;
+  border-radius: 20px;
+  width: 100%;
+  color: black;
+}
+
+tr td {
+  padding: 10px;
+  letter-spacing: 3px;
+  font-size: 20px;
+}
+
+tr:hover {
+  background-color: rgba(99, 110, 114, 0.6);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+
+table,
+th,
+td {
+  border: 3px solid #2c3e50;
+}
+
+.session {
+  border-radius: 25px;
+  margin-left: 80px;
+  margin-top: 20px;
+  transition-property: transform;
+  transition: 1s;
+  transition-timing-function: linear;
+}
+
+.session:hover {
+  transform: rotateY(180deg);
+}
